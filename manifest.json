@@ -1,0 +1,752 @@
+{
+  "name": "NIHPD objective-2 asymmetric infant brain atlas (browser-ready)",
+  "version": "1.0",
+  "generated": "2026-09-08",
+  "description": "Skull-stripped T1-weighted and T2-weighted 3-D templates for 11 age windows from birth to 60 months, resampled to a common cropped RAS grid and quantised to 8 bits for direct use in a web viewer.",
+  "source": {
+    "dataset": "NIH MRI Study of Normal Brain Development (NIHPD), objective 2 (infant) asymmetric atlases, MINC1 distribution",
+    "files": "nihpd_asym_<age>_{t1w,t2w,mask}.mnc",
+    "citation": [
+      "Fonov V, Evans AC, Botteron K, Almli CR, McKinstry RC, Collins DL; Brain Development Cooperative Group. Unbiased average age-appropriate atlases for pediatric studies. NeuroImage 2011;54(1):313-327.",
+      "Fonov VS, Evans AC, McKinstry RC, Almli CR, Collins DL. Unbiased nonlinear average age-appropriate brain templates from birth to adulthood. NeuroImage 2009;47(Suppl 1):S102."
+    ],
+    "note": "Redistribution and use are subject to the NIHPD / BIC data use terms of the original download."
+  },
+  "space": {
+    "orientation": "RAS",
+    "axes": [
+      {
+        "index": 0,
+        "name": "x",
+        "direction": "L->R",
+        "size": 124
+      },
+      {
+        "index": 1,
+        "name": "y",
+        "direction": "P->A",
+        "size": 155
+      },
+      {
+        "index": 2,
+        "name": "z",
+        "direction": "I->S",
+        "size": 123
+      }
+    ],
+    "dims": [
+      124,
+      155,
+      123
+    ],
+    "voxelSizeMm": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "originMm": [
+      -62.0,
+      -91.0,
+      -56.0
+    ],
+    "affine": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -62.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -91.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -56.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "worldToVoxelNote": "voxel = (world - originMm) / voxelSizeMm  (component-wise; affine is diagonal, 1 mm isotropic)",
+    "sourceGrid": {
+      "dims": [
+        195,
+        233,
+        159
+      ],
+      "affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -96.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -134.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -72.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "cropOffsetVoxels": [
+        34,
+        43,
+        16
+      ],
+      "note": "Add cropOffsetVoxels to a voxel index here to get the index in the original full-head NIHPD grid."
+    }
+  },
+  "encoding": {
+    "dtype": "uint8",
+    "compression": "gzip",
+    "memoryLayout": "x-fastest",
+    "offsetFormula": "offset = x + dims[0] * (y + dims[1] * z)",
+    "bytesPerVolumeRaw": 2364060,
+    "intensity": {
+      "sourceRange": [
+        0.0,
+        100.0
+      ],
+      "toSourceValue": "sourceValue = uint8 * 100 / 255",
+      "note": "Source templates are intensity-normalised to 0-100 arbitrary units, not absolute T1/T2 values. The same scaling is used for every age window and both contrasts, so intensities are directly comparable across the series. Background outside the brain mask is exactly 0."
+    },
+    "sliceExtraction": {
+      "axial": "z = const: contiguous block of dims[0]*dims[1] bytes starting at z*dims[0]*dims[1]; row-major with x fastest, rows run P->A.",
+      "coronal": "y = const: dims[2] contiguous runs of dims[0] bytes at offset dims[0]*(y + dims[1]*z), z = 0..dims[2]-1.",
+      "sagittal": "x = const: stride dims[0] over dims[1]*dims[2] samples starting at offset x."
+    },
+    "displayNote": "For conventional radiological/neurological display flip the row axis (y or z) so that anterior/superior is at the top of the canvas."
+  },
+  "masking": {
+    "applied": true,
+    "description": "Skull-stripped: the age-matched NIHPD brain mask has been applied to every volume, so voxels outside the mask are exactly 0. The masks are also shipped separately (contrast id 'mask', values 0/1).",
+    "caveat": "The distributed NIHPD masks are smooth, near-convex intracranial masks: they include extra-axial CSF and follow the inner table rather than the pial surface. maskVolumeMl is therefore an intracranial-compartment volume, NOT brain parenchymal volume, and should not be quoted as such."
+  },
+  "ages": [
+    {
+      "id": "00-02",
+      "label": "0\u20132 months",
+      "ageMonthsMin": 0,
+      "ageMonthsMax": 2,
+      "ageMonthsMid": 1.0,
+      "maskVoxels": 922747,
+      "maskVolumeMl": 922.7,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_00-02_t1w.u8.gz",
+          "bytesGzip": 745560,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "a070d9bc3ef17243fceea93a5d6368f48ffe515d4f6cc7a896d441bdc81d1ee4",
+          "sourceStats": {
+            "min": 27.701000213623047,
+            "max": 100.0,
+            "p1": 46.155,
+            "p50": 70.692,
+            "p95": 81.701,
+            "p99": 90.316,
+            "p995": 94.371
+          },
+          "displayWindow": [
+            0,
+            241
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_00-02_t2w.u8.gz",
+          "bytesGzip": 690346,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "467d28d7ccf8c3bf9bf3a0e77cac9707a6ab5a5f19c3e134b7a3490df5768d3e",
+          "sourceStats": {
+            "min": 11.50100040435791,
+            "max": 96.14800262451172,
+            "p1": 33.894,
+            "p50": 82.927,
+            "p95": 91.165,
+            "p99": 92.266,
+            "p995": 92.571
+          },
+          "displayWindow": [
+            0,
+            236
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_00-02_mask.u8.gz",
+        "bytesGzip": 26755,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "74968727e643fd39f73d531c48ca65f727d0d58404d858ad9259b98ab11e12dc"
+      }
+    },
+    {
+      "id": "02-05",
+      "label": "2\u20135 months",
+      "ageMonthsMin": 2,
+      "ageMonthsMax": 5,
+      "ageMonthsMid": 3.5,
+      "maskVoxels": 853353,
+      "maskVolumeMl": 853.4,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_02-05_t1w.u8.gz",
+          "bytesGzip": 643132,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "7d570301e6b534e0c811ef2ef315d82b2a8c3e1e45db6aacb2e2884fb314d2ae",
+          "sourceStats": {
+            "min": 19.44099998474121,
+            "max": 94.37799835205078,
+            "p1": 41.716,
+            "p50": 65.212,
+            "p95": 72.835,
+            "p99": 78.842,
+            "p995": 80.588
+          },
+          "displayWindow": [
+            0,
+            205
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_02-05_t2w.u8.gz",
+          "bytesGzip": 688957,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "c66a8b5b83f062360570114301c0a5585ee9a4b847467fe6d6f1cc49f333032a",
+          "sourceStats": {
+            "min": 14.605999946594238,
+            "max": 100.0,
+            "p1": 53.031,
+            "p50": 79.747,
+            "p95": 94.56,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_02-05_mask.u8.gz",
+        "bytesGzip": 27263,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "715f17d728ee26df9f5a76d7b96e07bf81cac521d461c20eb525ef9b2c90003d"
+      }
+    },
+    {
+      "id": "05-08",
+      "label": "5\u20138 months",
+      "ageMonthsMin": 5,
+      "ageMonthsMax": 8,
+      "ageMonthsMid": 6.5,
+      "maskVoxels": 889667,
+      "maskVolumeMl": 889.7,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_05-08_t1w.u8.gz",
+          "bytesGzip": 660609,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "28ef2be3adc10940b55a7ef42ea65bde60f1392f22050134a5cac0e1d29d2fc7",
+          "sourceStats": {
+            "min": 19.691999435424805,
+            "max": 92.25,
+            "p1": 39.66,
+            "p50": 65.244,
+            "p95": 74.198,
+            "p99": 78.272,
+            "p995": 79.355
+          },
+          "displayWindow": [
+            0,
+            202
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_05-08_t2w.u8.gz",
+          "bytesGzip": 675226,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "6dbd550401d7e27fa2a5ee0adb6ebfdb7d112463854e36376f9ea527f5a7a5d8",
+          "sourceStats": {
+            "min": 20.798999786376953,
+            "max": 100.0,
+            "p1": 56.875,
+            "p50": 76.754,
+            "p95": 94.231,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_05-08_mask.u8.gz",
+        "bytesGzip": 28015,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "c987cee4d865844e83b807b79bee5b9e1d52456cc98d7b9571dc965c879d7167"
+      }
+    },
+    {
+      "id": "08-11",
+      "label": "8\u201311 months",
+      "ageMonthsMin": 8,
+      "ageMonthsMax": 11,
+      "ageMonthsMid": 9.5,
+      "maskVoxels": 903936,
+      "maskVolumeMl": 903.9,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_08-11_t1w.u8.gz",
+          "bytesGzip": 689636,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "ae8b4a9ef1cc4de7497628414f9e323a604e1c799c761f2a3575ed436a7198e8",
+          "sourceStats": {
+            "min": 18.128999710083008,
+            "max": 90.72100067138672,
+            "p1": 40.612,
+            "p50": 66.915,
+            "p95": 77.582,
+            "p99": 80.433,
+            "p995": 81.247
+          },
+          "displayWindow": [
+            0,
+            207
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_08-11_t2w.u8.gz",
+          "bytesGzip": 692773,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "fd9eb832175b759713f3e534ada51ef0db5129b6bb4eee6f1657920adeb0ae73",
+          "sourceStats": {
+            "min": 20.375,
+            "max": 100.0,
+            "p1": 55.857,
+            "p50": 76.716,
+            "p95": 95.094,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_08-11_mask.u8.gz",
+        "bytesGzip": 27929,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "1f0bdaf8baaaac86cb26feea0607a47a550555b0ef116dc3d825941496d72111"
+      }
+    },
+    {
+      "id": "11-14",
+      "label": "11\u201314 months",
+      "ageMonthsMin": 11,
+      "ageMonthsMax": 14,
+      "ageMonthsMid": 12.5,
+      "maskVoxels": 924383,
+      "maskVolumeMl": 924.4,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_11-14_t1w.u8.gz",
+          "bytesGzip": 726500,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "06379369f20e93d5c4a63582f79ca963ddceda4586b3c875eedb7e7bffa06915",
+          "sourceStats": {
+            "min": 18.993000030517578,
+            "max": 90.83399963378906,
+            "p1": 42.135,
+            "p50": 70.149,
+            "p95": 82.159,
+            "p99": 84.599,
+            "p995": 85.358
+          },
+          "displayWindow": [
+            0,
+            218
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_11-14_t2w.u8.gz",
+          "bytesGzip": 732675,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "21846367e6f68a78dea2394ce1bca6daf26ec059a17c5983ddd7fc3d8f42233b",
+          "sourceStats": {
+            "min": 16.12700080871582,
+            "max": 100.0,
+            "p1": 54.546,
+            "p50": 77.525,
+            "p95": 95.543,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_11-14_mask.u8.gz",
+        "bytesGzip": 29213,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "fd75b6b9c5a96cf4d85277a151630025e667fe9e62e6b0cd07856532cbcf96d9"
+      }
+    },
+    {
+      "id": "14-17",
+      "label": "14\u201317 months",
+      "ageMonthsMin": 14,
+      "ageMonthsMax": 17,
+      "ageMonthsMid": 15.5,
+      "maskVoxels": 914973,
+      "maskVolumeMl": 915.0,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_14-17_t1w.u8.gz",
+          "bytesGzip": 725352,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "5afb204e947074b5096b606036d212d566aa09fd778516b4d7fc955e92ddc93a",
+          "sourceStats": {
+            "min": 15.060999870300293,
+            "max": 100.0,
+            "p1": 42.519,
+            "p50": 71.228,
+            "p95": 83.692,
+            "p99": 85.583,
+            "p995": 86.15
+          },
+          "displayWindow": [
+            0,
+            220
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_14-17_t2w.u8.gz",
+          "bytesGzip": 743158,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "a14cc891a7759a1dbfe12c1a364ed16a91cc11a2806fd1dc63bd265e87f4690a",
+          "sourceStats": {
+            "min": 16.930999755859375,
+            "max": 100.0,
+            "p1": 53.919,
+            "p50": 77.662,
+            "p95": 96.901,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_14-17_mask.u8.gz",
+        "bytesGzip": 28994,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "f7228f861cb85e77135e8fcb86094f8992f0e4f70f69ffc59b78bcc166ac8888"
+      }
+    },
+    {
+      "id": "17-21",
+      "label": "17\u201321 months",
+      "ageMonthsMin": 17,
+      "ageMonthsMax": 21,
+      "ageMonthsMid": 19.0,
+      "maskVoxels": 956722,
+      "maskVolumeMl": 956.7,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_17-21_t1w.u8.gz",
+          "bytesGzip": 764191,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "341267c9758004ae1b2b2cce1376ceea334e6244710c61286f8946a740ed840c",
+          "sourceStats": {
+            "min": 19.386999130249023,
+            "max": 91.57499694824219,
+            "p1": 42.48,
+            "p50": 71.239,
+            "p95": 84.403,
+            "p99": 86.275,
+            "p995": 86.82
+          },
+          "displayWindow": [
+            0,
+            221
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_17-21_t2w.u8.gz",
+          "bytesGzip": 787706,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "ba8f82fa956ac067db3bc6f7d3463694c8f42f05c99981483b274f9b230d8f8f",
+          "sourceStats": {
+            "min": 17.22599983215332,
+            "max": 100.0,
+            "p1": 52.934,
+            "p50": 77.308,
+            "p95": 96.611,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_17-21_mask.u8.gz",
+        "bytesGzip": 28905,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "de95bf723abe71c88ef534cd3a62c6cd1f7e53dc3138783bf6023fa37053d552"
+      }
+    },
+    {
+      "id": "21-27",
+      "label": "21\u201327 months",
+      "ageMonthsMin": 21,
+      "ageMonthsMax": 27,
+      "ageMonthsMid": 24.0,
+      "maskVoxels": 970354,
+      "maskVolumeMl": 970.4,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_21-27_t1w.u8.gz",
+          "bytesGzip": 794480,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "df6131394ad0a05921cbb184842f9ea0d584dcabdec41b9bf6acee5e60eed51c",
+          "sourceStats": {
+            "min": 17.44499969482422,
+            "max": 93.53099822998047,
+            "p1": 43.997,
+            "p50": 73.749,
+            "p95": 87.003,
+            "p99": 89.082,
+            "p995": 89.643
+          },
+          "displayWindow": [
+            0,
+            229
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_21-27_t2w.u8.gz",
+          "bytesGzip": 816317,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "a990ddc2c5f4738d1ddd42f0aa3e46b68d0465b74d49b2235de131ba78f8b2ad",
+          "sourceStats": {
+            "min": 12.093000411987305,
+            "max": 100.0,
+            "p1": 52.61,
+            "p50": 77.648,
+            "p95": 97.347,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_21-27_mask.u8.gz",
+        "bytesGzip": 30152,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "a965be08fdfcdf83aa2f2e54db1c30b65b5f3caefc6e3805245f76a01da149b6"
+      }
+    },
+    {
+      "id": "27-33",
+      "label": "27\u201333 months",
+      "ageMonthsMin": 27,
+      "ageMonthsMax": 33,
+      "ageMonthsMid": 30.0,
+      "maskVoxels": 978067,
+      "maskVolumeMl": 978.1,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_27-33_t1w.u8.gz",
+          "bytesGzip": 804809,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "d579328ddd52d942c06e96033721c15f86b44adeb6ab0db0be3b709df9949523",
+          "sourceStats": {
+            "min": 14.98799991607666,
+            "max": 96.97200012207031,
+            "p1": 44.36,
+            "p50": 74.101,
+            "p95": 88.804,
+            "p99": 90.803,
+            "p995": 91.326
+          },
+          "displayWindow": [
+            0,
+            233
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_27-33_t2w.u8.gz",
+          "bytesGzip": 828634,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "b18cdfec7971deacb6a307588b5c4e83e1a9612d057413aae14d8c983f67d910",
+          "sourceStats": {
+            "min": 12.663000106811523,
+            "max": 100.0,
+            "p1": 51.962,
+            "p50": 77.719,
+            "p95": 97.899,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_27-33_mask.u8.gz",
+        "bytesGzip": 29804,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "20d23507ed514fcf3d7cce9f1d3ad6d2f430b203a9f4143f75a380b50f22b4ef"
+      }
+    },
+    {
+      "id": "33-44",
+      "label": "33\u201344 months",
+      "ageMonthsMin": 33,
+      "ageMonthsMax": 44,
+      "ageMonthsMid": 38.5,
+      "maskVoxels": 991734,
+      "maskVolumeMl": 991.7,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_33-44_t1w.u8.gz",
+          "bytesGzip": 822352,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "f037b09818439dbfdb4a9a39bb56858ccb2aa79bd6c2fe7d7138b4373f27d63e",
+          "sourceStats": {
+            "min": 17.33799934387207,
+            "max": 96.47200012207031,
+            "p1": 44.63,
+            "p50": 74.045,
+            "p95": 88.801,
+            "p99": 91.0,
+            "p995": 91.607
+          },
+          "displayWindow": [
+            0,
+            234
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_33-44_t2w.u8.gz",
+          "bytesGzip": 849934,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "74bdc8250712779aa78a262649c7d910f9cbb9b97990973d9862c8636861a9b5",
+          "sourceStats": {
+            "min": 19.999000549316406,
+            "max": 100.0,
+            "p1": 51.251,
+            "p50": 77.915,
+            "p95": 97.606,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_33-44_mask.u8.gz",
+        "bytesGzip": 30361,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "b84fc8cd1cdf65748ba59d71727782f762b9d173a019ea6f8a73c7ad2c107364"
+      }
+    },
+    {
+      "id": "44-60",
+      "label": "44\u201360 months",
+      "ageMonthsMin": 44,
+      "ageMonthsMax": 60,
+      "ageMonthsMid": 52.0,
+      "maskVoxels": 990907,
+      "maskVolumeMl": 990.9,
+      "contrasts": {
+        "t1w": {
+          "file": "volumes/nihpd_asym_44-60_t1w.u8.gz",
+          "bytesGzip": 829815,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "74bfd7ced92198f9f8070d3d9daf760fa86a795ae8fcf053ef157c8c5248500d",
+          "sourceStats": {
+            "min": 13.71500015258789,
+            "max": 99.63400268554688,
+            "p1": 44.615,
+            "p50": 76.184,
+            "p95": 90.498,
+            "p99": 92.826,
+            "p995": 93.47
+          },
+          "displayWindow": [
+            0,
+            238
+          ]
+        },
+        "t2w": {
+          "file": "volumes/nihpd_asym_44-60_t2w.u8.gz",
+          "bytesGzip": 853650,
+          "bytesRaw": 2364060,
+          "sha256Gzip": "ad6927c1d18d4b26ef6c0ab48fd5743aaf87fdd0b17fde8531fbbbd68cd46b8c",
+          "sourceStats": {
+            "min": 19.281999588012695,
+            "max": 100.0,
+            "p1": 49.812,
+            "p50": 77.355,
+            "p95": 99.939,
+            "p99": 100.0,
+            "p995": 100.0
+          },
+          "displayWindow": [
+            0,
+            255
+          ]
+        }
+      },
+      "mask": {
+        "file": "volumes/nihpd_asym_44-60_mask.u8.gz",
+        "bytesGzip": 29468,
+        "bytesRaw": 2364060,
+        "sha256Gzip": "6ab406730ff9c40b8f64f0b7f50c275bb3c16b1bca8f82c5ed73cf3eed695004"
+      }
+    }
+  ]
+}
